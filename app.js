@@ -15,7 +15,7 @@ app.use(logger('dev'))
 app.use(Express.json())
 app.use(Express.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(Express.static(path.join(__dirname, 'client/build')));
 app.use(Express.static(path.join(__dirname, 'public')))
 app.use(session({ secret: 'cats' }))
 app.use(passport.initialize())
