@@ -4,7 +4,7 @@ import Button from '../components/button'
 
 const fetchArticle = id => {
   const endpoint = [
-    `/articles/${id}`,
+    `/api/articles/${id}`,
     {
       method: 'get',
       headers: {
@@ -18,7 +18,7 @@ const fetchArticle = id => {
 
 const saveArticle = article => {
   const endpoint = [
-    '/articles',
+    '/api/articles',
     {
       method: 'put',
       headers: {
@@ -81,15 +81,17 @@ const ArticlesManagement = props => {
     link2.onChange(stage(_link2))
   }
 
+  const isNewPost = !parseInt(props.match.params.id)
+
   useEffect(() => {
-    const id = parseInt(props.match.params.id)
-    id && fetchArticle(id).then(initializeForm)
+    const id = props.match.params.id
+    !isNewPost && fetchArticle(id).then(initializeForm)
   }, [])
 
   return (
     <div>
       <form className="add-article-form" onSubmit={handleSubmit}>
-        <h2>Create an Article</h2>
+        <h2>{isNewPost ? 'Create' : 'Edit'} an Article</h2>
         <label>
           <div>topic</div>
           <input {...topic} required type="text" className="input" />

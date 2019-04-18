@@ -1,2 +1,0 @@
-release: cd client && yarn && yarn build
-web: npm start

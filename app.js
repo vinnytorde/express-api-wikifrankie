@@ -7,7 +7,6 @@ import session from 'express-session'
 import passport from 'passport'
 import authRouter from './routes/auth'
 import articlesRouter from './routes/articles'
-import indexRouter from './routes/index'
 
 const app = Express()
 
@@ -21,7 +20,10 @@ app.use(session({ secret: 'cats' }))
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/', indexRouter)
 app.use('/auth', authRouter)
-app.use('/articles', articlesRouter)
+app.use('/api/articles', articlesRouter)
+
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 export default app

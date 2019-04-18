@@ -7,7 +7,7 @@ const Articles = props => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    fetch('/articles')
+    fetch('/api/articles')
       .then(r => r.json())
       .then(setData)
   }, [])
