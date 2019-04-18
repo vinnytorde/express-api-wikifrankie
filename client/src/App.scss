@@ -1,0 +1,132 @@
+@mixin setBgColorAndHover($baseColor) {
+  background-color: $baseColor;
+  &:hover {
+    background-color: darken($baseColor, 5%);
+  }
+}
+
+$brand: #7d4cdb;
+$accent-1: #6fffb0;
+$accent-2: #fd6fff;
+$accent-3: #81fced;
+$accent-4: #ffca58;
+$neutra1-1: #00873d;
+$neutra1-2: #3d138d;
+$neutra1-3: #00739d;
+$neutra1-4: #a2423d;
+$light-1: #f8f8f8;
+$light-2: #f2f2f2;
+$light-3: #ededed;
+$light-4: #dadada;
+$dark-1: #333333;
+$dark-2: #555555;
+$dark-3: #777777;
+$dark-4: #999999;
+$status-error: #ff4040;
+$status-warning: #ffaa15;
+$status-ok: #00c781;
+$status-disabled: #cccccc;
+
+.bold {
+  font-weight: 700;
+}
+
+.header {
+  background: $brand;
+  color: $light-1;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.header,
+.footer,
+.content {
+  padding: 16px;
+}
+
+.footer {
+  padding: 16px;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  background: $brand;
+  width: 100%;
+  color: $light-1;
+}
+
+.add-article-form {
+  display: flex;
+  flex-direction: column;
+
+  label + div {
+    margin: 8px 0;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin: 8px 0;
+    font-size: 1.25em;
+
+    input {
+      font-size: 0.85em;
+      max-width: 50%;
+    }
+
+    textarea {
+      font-size: 0.85em;
+      max-width: 50%;
+      height: 50px;
+    }
+  }
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 25px;
+  padding: 1rem 2rem;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  &:hover,
+  &:focus {
+    background: #0053ba;
+  }
+
+  &:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+
+  &-primary {
+    @include setBgColorAndHover($status-ok);
+  }
+}
+
+.table {
+  tr.hover-highlight:hover {
+    background: $light-1;
+  }
+
+  td {
+    padding: 1em;
+  }
+}
