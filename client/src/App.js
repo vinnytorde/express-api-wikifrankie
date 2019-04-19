@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { Grommet } from 'grommet'
 import Login from './pages/login'
 import Articles from './pages/articles'
@@ -46,7 +46,7 @@ const App = props => {
           <Switch>
             <Route path="/articles" exact component={Articles} />
             <Route path="/articles/:id" component={ArticlesManagement} />
-            <Route path="/" component={Login} />
+            <Route path="/" render={() => <Redirect to="/articles" />} />
           </Switch>
         </div>
         <Footer />
