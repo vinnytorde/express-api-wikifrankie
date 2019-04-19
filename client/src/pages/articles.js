@@ -19,6 +19,9 @@ const Articles = props => {
       <Table
         data={data}
         hightlightOnHover
+        onRowClick={rowProps => {
+          props.history.push(`${props.location.pathname}/${rowProps.id}`)
+        }}
         columnConfig={[
           { label: 'Topic', key: 'topic' },
           { label: 'Company/Application', key: 'application' },

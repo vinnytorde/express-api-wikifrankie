@@ -1,10 +1,14 @@
 import React from 'react'
 
-const Table = ({ data, columnConfig, hightlightOnHover }) => {
+const Table = ({ data, columnConfig, hightlightOnHover, onRowClick }) => {
   const row = data => {
-    const highlightClassName = hightlightOnHover ? 'hover-highlight' : ''
+    const rowAttributes = {
+      className: hightlightOnHover ? 'hover-highlight' : '',
+      onClick: () => onRowClick(data)
+    }
+
     return (
-      <tr className={highlightClassName}>
+      <tr {...rowAttributes}>
         {columnConfig.map(columnMeta => {
           const modifier = columnMeta.modifier
           const value = data[columnMeta.key]
