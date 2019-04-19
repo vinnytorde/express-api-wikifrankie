@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { Grommet } from 'grommet'
 import Login from './pages/login'
 import Articles from './pages/articles'
 import ArticlesManagement from './pages/articles-management'
@@ -38,17 +39,19 @@ const App = props => {
   }, [])
 
   return (
-    <div className={'app ' + layout}>
-      <Header />
-      <div className="content">
-        <Switch>
-          <Route path="/articles" exact component={Articles} />
-          <Route path="/articles/:id" component={ArticlesManagement} />
-          <Route path="/" component={Login} />
-        </Switch>
+    <Grommet>
+      <div className={'app ' + layout}>
+        <Header />
+        <div className="content">
+          <Switch>
+            <Route path="/articles" exact component={Articles} />
+            <Route path="/articles/:id" component={ArticlesManagement} />
+            <Route path="/" component={Login} />
+          </Switch>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </Grommet>
   )
 }
 
