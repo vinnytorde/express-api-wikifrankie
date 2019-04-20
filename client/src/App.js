@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
-import { Grommet, Menu } from 'grommet'
+import { Grommet, Menu, Box, Heading } from 'grommet'
 import Articles from './pages/articles'
 import ArticlesManagement from './pages/articles-management'
 import './App.scss'
 
 const Header = ({ history }) => {
   const routeTo = destination => () => history.push(destination)
-
   return (
-    <div className="header">
-      <h1>WikiFrankie</h1>
+    <Box direction="row" background="brand" pad="small" justify="between">
+      <Heading margin="none" size="small">
+        WikiFrankie
+      </Heading>
       <Menu
         label="Menu"
         items={[
@@ -21,9 +22,10 @@ const Header = ({ history }) => {
           { label: 'Settings', onClick: routeTo('/settings') }
         ]}
       />
-    </div>
+    </Box>
   )
 }
+
 const Footer = props => (
   <div className="footer">
     POWERED BY <span className="mos">MOS</span>
@@ -52,7 +54,7 @@ const App = props => {
 
   return (
     <Grommet>
-      <div className={'app ' + layout}>
+      <div className={'app-' + layout}>
         <Header history={props.history} />
         <div className="content">
           <Switch>

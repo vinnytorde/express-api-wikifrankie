@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
+import { Button } from 'grommet'
 import useForm from '../hooks/form'
-import Button from '../components/button'
+import { useSnackbar } from 'notistack'
 
 const fetchArticle = id => {
   const endpoint = [
@@ -60,6 +61,7 @@ const ArticlesManagement = props => {
   const link2 = useForm({ name: 'link2', value: '' })
   const link1 = useForm({ name: 'link1', value: '' })
   const createAnother = useForm({ name: 'createAnother', type: 'checkbox' })
+  const { enqueueSnackbar } = useSnackbar()
 
   const resetForm = () => {
     const resetField = field => {
@@ -78,12 +80,16 @@ const ArticlesManagement = props => {
   }
 
   const handleRouting = () => {
+    let message
     if (createAnother.checked) {
       props.history.push('/articles/create')
       resetForm()
+      message = 'Created Successfully!'
     } else {
       props.history.push('/articles')
+      message = 'Success!'
     }
+    enqueueSnackbar(message)
   }
 
   const handleSubmit = event => {
@@ -174,7 +180,7 @@ const ArticlesManagement = props => {
               </div>
             </label>
           )}
-          <Button variant="primary">Submit Article</Button>
+          <Button primary label="Submit Article" type="submit" />
         </div>
       </form>
     </div>

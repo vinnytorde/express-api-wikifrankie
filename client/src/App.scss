@@ -31,19 +31,6 @@ $status-disabled: #cccccc;
   font-weight: 700;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: $brand;
-  color: $light-1;
-
-  h1 {
-    margin: 0;
-  }
-}
-
-.header,
 .footer,
 .content {
   padding: 16px;
@@ -81,42 +68,6 @@ $status-disabled: #cccccc;
       max-width: 50%;
       height: 50px;
     }
-  }
-}
-
-.btn {
-  display: inline-block;
-  border: none;
-  border-radius: 25px;
-  padding: 1rem 2rem;
-  margin: 0;
-  text-decoration: none;
-  background: #0069ed;
-  color: #ffffff;
-  font-family: sans-serif;
-  font-size: 1rem;
-  cursor: pointer;
-  text-align: center;
-  transition: background 250ms ease-in-out, transform 150ms ease;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  &:hover,
-  &:focus {
-    background: #0053ba;
-  }
-
-  &:focus {
-    outline: 1px solid #fff;
-    outline-offset: -4px;
-  }
-
-  &:active {
-    transform: scale(0.99);
-  }
-
-  &-primary {
-    @include setBgColorAndHover($status-ok);
   }
 }
 
