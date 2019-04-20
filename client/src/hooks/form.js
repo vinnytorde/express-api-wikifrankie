@@ -40,7 +40,7 @@ const useForm = ({
     required,
     valid: !validate(value),
     reset() {
-      setValue(initial)
+      setValue(_initial)
     }
   }
 
