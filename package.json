@@ -8,6 +8,15 @@
     "dev": "concurrently \"yarn:dev:api\" \"cd client && yarn start\" -n api,client",
     "heroku-postbuild": "cd client && yarn && yarn build"
   },
+  "nodemonConfig": {
+    "ignore": [
+      "db",
+      "migrations",
+      "client",
+      "public",
+      "seeders"
+    ]
+  },
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
     "babel-preset-env": "^1.7.0",
