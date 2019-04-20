@@ -32,6 +32,9 @@ $status-disabled: #cccccc;
 }
 
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: $brand;
   color: $light-1;
 
@@ -48,11 +51,7 @@ $status-disabled: #cccccc;
 
 .footer {
   padding: 16px;
-  position: absolute;
-  bottom: 0;
-  z-index: 1;
   background: $brand;
-  width: 100%;
   color: $light-1;
 }
 

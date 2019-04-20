@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { Grommet } from 'grommet'
-import Login from './pages/login'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+import { Grommet, Menu } from 'grommet'
 import Articles from './pages/articles'
 import ArticlesManagement from './pages/articles-management'
 import './App.scss'
 
-const Header = props => (
-  <div className="header">
-    <h1>WikiFrankie</h1>
-    {/* {isLoggedIn ? <Avatar/> : <Button color="inherit">Login</Button>}  */}
-  </div>
-)
+const Header = ({ history }) => {
+  const routeTo = destination => () => history.push(destination)
+
+  return (
+    <div className="header">
+      <h1>WikiFrankie</h1>
+      <Menu
+        label="Menu"
+        items={[
+          { label: 'Articles', onClick: routeTo('/articles') },
+          { label: 'Create Article', onClick: routeTo('/articles/create') },
+          { label: 'Topics', onClick: routeTo('/topics') },
+          { label: 'User', onClick: routeTo('/user') },
+          { label: 'Settings', onClick: routeTo('/settings') }
+        ]}
+      />
+    </div>
+  )
+}
 const Footer = props => (
   <div className="footer">
     POWERED BY <span className="mos">MOS</span>
@@ -41,7 +53,7 @@ const App = props => {
   return (
     <Grommet>
       <div className={'app ' + layout}>
-        <Header />
+        <Header history={props.history} />
         <div className="content">
           <Switch>
             <Route path="/articles" exact component={Articles} />
@@ -55,4 +67,4 @@ const App = props => {
   )
 }
 
-export default App
+export default withRouter(App)

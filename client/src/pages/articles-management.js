@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
 import useForm from '../hooks/form'
 import Button from '../components/button'
 
@@ -33,13 +34,57 @@ const saveArticle = article => {
 
 const ArticlesManagement = props => {
   const [id, setId] = useState()
-  const topic = useForm('topic', '')
-  const companyApplication = useForm('company/application', '')
-  const date = useForm('date', '')
-  const expires = useForm('expires', '')
-  const description = useForm('description', '')
-  const link1 = useForm('link1', '')
-  const link2 = useForm('link2', '')
+  const topic = useForm({ name: 'topic', value: '', required: true })
+  const companyApplication = useForm({
+    name: 'company/application',
+    value: '',
+    required: true
+  })
+  const date = useForm({
+    name: 'date',
+    type: 'date',
+    value: new Date(),
+    modifier: date => moment(date).format('YYYY-MM-DD'),
+    required: true
+  })
+  const expires = useForm({
+    name: 'expires',
+    type: 'date',
+    value: '',
+    modifier: date => moment(date).format('YYYY-MM-DD')
+  })
+  const description = useForm({
+    name: 'description',
+    value: ''
+  })
+  const link2 = useForm({ name: 'link2', value: '' })
+  const link1 = useForm({ name: 'link1', value: '' })
+  const createAnother = useForm({ name: 'createAnother', type: 'checkbox' })
+
+  const resetForm = () => {
+    const resetField = field => {
+      field.reset()
+    }
+    ;[
+      topic,
+      companyApplication,
+      date,
+      expires,
+      description,
+      link1,
+      link2
+    ].forEach(resetField)
+    setId(null)
+  }
+
+  const handleRouting = () => {
+    if (createAnother.checked) {
+      props.history.push('/articles/create')
+      resetForm()
+    } else {
+      props.history.push('/articles')
+    }
+  }
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -55,7 +100,7 @@ const ArticlesManagement = props => {
 
     if (id) article = { ...article, id }
 
-    saveArticle(article)
+    saveArticle(article).then(handleRouting)
   }
 
   const initializeForm = article => {
@@ -81,7 +126,7 @@ const ArticlesManagement = props => {
     link2.onChange(stage(_link2))
   }
 
-  const isNewPost = !parseInt(props.match.params.id)
+  const isNewPost = props.match.params.id === 'create'
 
   useEffect(() => {
     const id = props.match.params.id
@@ -94,38 +139,41 @@ const ArticlesManagement = props => {
         <h2>{isNewPost ? 'Create' : 'Edit'} an Article</h2>
         <label>
           <div>topic</div>
-          <input {...topic} required type="text" className="input" />
+          <input {...topic} />
         </label>
         <label>
           <div>company/application</div>
-          <input
-            {...companyApplication}
-            required
-            type="text"
-            className="input"
-          />
+          <input {...companyApplication} />
         </label>
         <label>
           <div>date</div>
-          <input {...date} required type="date" className="input" />
+          <input {...date} />
         </label>
         <label>
-          <div>expires</div>
-          <input {...expires} required type="date" className="input" />
+          <div>expired</div>
+          <input {...expires} />
         </label>
         <label>
           <div>description</div>
-          <textarea {...description} required type="text" className="input" />
+          <textarea {...description} />
         </label>
         <label>
           <div>link1</div>
-          <input {...link1} required type="text" className="input" />
+          <input {...link1} />
         </label>
         <label>
           <div>link2</div>
-          <input {...link2} required type="text" className="input" />
+          <input {...link2} />
         </label>
         <div>
+          {isNewPost && (
+            <label>
+              <div className="flex">
+                <span>Create another</span>
+                <input {...createAnother} />
+              </div>
+            </label>
+          )}
           <Button variant="primary">Submit Article</Button>
         </div>
       </form>

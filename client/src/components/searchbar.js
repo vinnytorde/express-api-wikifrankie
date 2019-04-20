@@ -2,7 +2,7 @@ import React from 'react'
 import useForm from '../hooks/form'
 
 const Search = props => {
-  const search = useForm('search')
+  const search = useForm({ name: 'search', type: 'text' })
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -11,7 +11,7 @@ const Search = props => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" {...search} />
+      <input {...search} />
       <input type="submit" />
     </form>
   )

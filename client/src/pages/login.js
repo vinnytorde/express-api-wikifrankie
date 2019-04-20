@@ -13,8 +13,8 @@ const createSession = credentials => {
 }
 
 const Login = props => {
-  const username = useForm('username', '')
-  const password = useForm('password', '')
+  const username = useForm({ name: 'username', type: 'text' })
+  const password = useForm({ name: 'password', type: 'text' })
   const [error, handleError] = useState(false)
 
   const routeToArticles = () => props.history.push('/articles')
