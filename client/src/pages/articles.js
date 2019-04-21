@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import Searchbar from '../components/searchbar'
+import { Heading } from 'grommet'
 import Table from '../components/table'
 import { toPrettyDate } from '../utils/utils'
 
@@ -14,7 +14,9 @@ const Articles = props => {
 
   return (
     <div>
-      <h2>Articles</h2>
+      <Heading margin="none" level={2}>
+        All Entries
+      </Heading>
       {/* <Searchbar /> */}
       <Table
         data={data}

@@ -1,34 +1,39 @@
 import React from 'react'
+import {
+  Table as GrommetTable,
+  TableHeader,
+  TableRow,
+  TableCell,
+  TableBody
+} from 'grommet'
 
-const Table = ({ data, columnConfig, hightlightOnHover, onRowClick }) => {
+const Table = ({ data, columnConfig, onRowClick }) => {
   const row = data => {
     const rowAttributes = {
-      className: hightlightOnHover ? 'hover-highlight' : '',
       onClick: () => onRowClick(data)
     }
-
     return (
-      <tr {...rowAttributes}>
+      <TableRow {...rowAttributes}>
         {columnConfig.map(columnMeta => {
           const modifier = columnMeta.modifier
           const value = data[columnMeta.key]
-          return <td>{modifier ? modifier(value) : value}</td>
+          return <TableCell>{modifier ? modifier(value) : value}</TableCell>
         })}
-      </tr>
+      </TableRow>
     )
   }
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
+    <GrommetTable>
+      <TableHeader>
+        <TableRow>
           {columnConfig.map(({ label }) => {
-            return <td className="bold">{label}</td>
+            return <TableCell>{label}</TableCell>
           })}
-        </tr>
-      </thead>
-      <tbody>{data.map(row)}</tbody>
-    </table>
+        </TableRow>
+      </TableHeader>
+      <TableBody>{data.map(row)}</TableBody>
+    </GrommetTable>
   )
 }
 
