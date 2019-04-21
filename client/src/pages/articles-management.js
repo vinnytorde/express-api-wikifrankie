@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import moment from 'moment'
 import {
   Box,
   Button,
@@ -13,7 +12,6 @@ import {
 } from 'grommet'
 import PageHeader from '../components/page-header'
 import useForm from '../hooks/form'
-import useArticle from '../hooks/articles'
 import { useSnackbar } from 'notistack'
 
 const fetchArticle = id => {
@@ -65,8 +63,7 @@ const ArticlesManagement = props => {
   const expires = useForm({
     name: 'expires',
     type: 'date',
-    value: '',
-    modifier: date => moment(date).format('YYYY-MM-DD')
+    value: ''
   })
   expires.onSelect = expires.onChange
   expires.date = expires.value
@@ -111,6 +108,7 @@ const ArticlesManagement = props => {
 
   const handleSubmit = event => {
     event.preventDefault()
+    console.log(expires)
     let article = {
       topic: topic.value,
       application: companyApplication.value,
@@ -161,7 +159,7 @@ const ArticlesManagement = props => {
       <PageHeader>{isNewPost ? 'Create' : 'Edit'} an Article</PageHeader>
       <Form onSubmit={handleSubmit}>
         <Box margin="auto" width="xlarge">
-          <Box direction="row">
+          <Box direction="row" margin={{ vertical: 'large' }} justify="between">
             <Box gap="small">
               <FormField
                 size="large"
@@ -176,22 +174,20 @@ const ArticlesManagement = props => {
                 {...companyApplication}
               />
             </Box>
-            <Box direction="row" gap="small">
-              <Box align="center">
-                <Text margin="medium">Date</Text>
-                <Calendar size="small" {...date} />
-              </Box>
-              <Box align="center">
-                <Text margin="medium">Expires</Text>
-                <Calendar size="small" {...expires} />
-              </Box>
+            <Box align="center">
+              <Text margin="large">Date</Text>
+              <Calendar size="small" {...date} />
+            </Box>
+            <Box align="center">
+              <Text margin="large">Expires</Text>
+              <Calendar size="small" {...expires} />
             </Box>
           </Box>
           <Box height="medium">
             <Text>Description</Text>
             <TextArea fill resize={false} {...description} />
           </Box>
-          <Box direction="row" gap="small">
+          <Box direction="row" gap="small" margin={{ vertical: 'medium' }}>
             <FormField
               size="large"
               label="Link 2"
@@ -209,7 +205,12 @@ const ArticlesManagement = props => {
             {isNewPost && (
               <CheckBox label="Create Another?" {...createAnother} />
             )}
-            <Button primary label="Submit Article" type="submit" />
+            <Button
+              primary
+              label="Submit Article"
+              type="submit"
+              margin={{ vertical: 'medium' }}
+            />
           </Box>
         </Box>
       </Form>

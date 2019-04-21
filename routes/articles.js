@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/', async (req, res) => {
-  const {
+  let {
     id,
     topic,
     application,
@@ -49,6 +49,9 @@ router.put('/', async (req, res) => {
     link1,
     link2
   } = req.body
+
+  // random db thing
+  if (!expirationDate) expirationDate = null
 
   const result = await Article.upsert({
     id,

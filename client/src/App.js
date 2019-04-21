@@ -1,6 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
-import { Grommet, Menu, Box, Heading, Text } from 'grommet'
+import { Grommet, Menu, Box, Text } from 'grommet'
+import {
+  AddCircle,
+  Gremlin,
+  Inspect,
+  Menu as MenuIcon,
+  SettingsOption,
+  UserSettings,
+  VirtualMachine
+} from 'grommet-icons'
 import Articles from './pages/articles'
 import ArticlesManagement from './pages/articles-management'
 import './App.scss'
@@ -9,23 +18,67 @@ const Header = ({ history }) => {
   const routeTo = destination => () => history.push(destination)
   return (
     <Box direction="row" background="brand" justify="between">
-      <Text
-        margin={{ vertical: '0', horizontal: 'small' }}
-        size="medium"
-        weight="bold"
-      >
-        Wiki
-        <br />
-        Frankie
-      </Text>
+      <Box direction="row" align="center">
+        <Gremlin size="large" />
+        <Text
+          margin={{ vertical: '0', horizontal: 'small' }}
+          size="medium"
+          weight="bold"
+        >
+          Wiki
+          <br />
+          Frankie
+        </Text>
+      </Box>
       <Menu
+        icon={<MenuIcon />}
         label="Menu"
         items={[
-          { label: 'Articles', onClick: routeTo('/articles') },
-          { label: 'Create Article', onClick: routeTo('/articles/create') },
-          { label: 'Topics', onClick: routeTo('/topics') },
-          { label: 'User', onClick: routeTo('/user') },
-          { label: 'Settings', onClick: routeTo('/settings') }
+          {
+            label: 'Articles',
+            onClick: routeTo('/articles'),
+            icon: (
+              <Box margin={{ horizontal: 'xsmall' }}>
+                <Inspect />
+              </Box>
+            )
+          },
+          {
+            label: 'Create Article',
+            onClick: routeTo('/articles/create'),
+            icon: (
+              <Box margin={{ horizontal: 'xsmall' }}>
+                <AddCircle />
+              </Box>
+            )
+          },
+          {
+            label: 'Topics',
+            onClick: routeTo('/topics'),
+            icon: (
+              <Box margin={{ horizontal: 'xsmall' }}>
+                <VirtualMachine />
+              </Box>
+            )
+          },
+          {
+            label: 'User',
+            onClick: routeTo('/user'),
+            icon: (
+              <Box margin={{ horizontal: 'xsmall' }}>
+                <UserSettings />
+              </Box>
+            )
+          },
+          {
+            label: 'Settings',
+            onClick: routeTo('/settings'),
+            icon: (
+              <Box margin={{ horizontal: 'xsmall' }}>
+                <SettingsOption />
+              </Box>
+            )
+          }
         ]}
       />
     </Box>
