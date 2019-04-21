@@ -7,13 +7,10 @@ import {
   TableBody
 } from 'grommet'
 
-const Table = ({ data, columnConfig, onRowClick }) => {
+const Table = ({ data, columnConfig }) => {
   const row = data => {
-    const rowAttributes = {
-      onClick: () => onRowClick(data)
-    }
     return (
-      <TableRow {...rowAttributes}>
+      <TableRow>
         {columnConfig.map(columnMeta => {
           const modifier = columnMeta.modifier
           const value = data[columnMeta.key]
