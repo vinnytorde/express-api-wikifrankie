@@ -5,6 +5,20 @@ import Table from '../components/table'
 import PageHeader from '../components/page-header'
 import { toPrettyDate } from '../utils/utils'
 
+const deleteArticle = id => {
+  const endpoint = [
+    `/api/articles/${id}`,
+    {
+      method: 'delete',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }
+  ]
+  return fetch(...endpoint).then(r => r.json())
+}
+
 const Articles = props => {
   const appendButtons = row => {
     const navigateToArticle = () =>
@@ -20,7 +34,7 @@ const Articles = props => {
           margin="xsmall"
         />
         <Button
-          onClick={navigateToArticle}
+          onClick={() => deleteArticle(row.id)}
           fill
           color="status-error"
           label="Delete"

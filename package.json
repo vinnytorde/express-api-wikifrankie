@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev:api": "nodemon ./bin/www",
-    "ui": "cd client && yarn start",
+    "dev:ui": "cd client && yarn start",
     "dev": "concurrently \"yarn:dev:api\" \"yarn:ui\" -n api,client",
     "heroku-postbuild": "cd client && yarn && yarn build"
   },
