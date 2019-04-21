@@ -108,7 +108,6 @@ const ArticlesManagement = props => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    console.log(expires)
     let article = {
       topic: topic.value,
       application: companyApplication.value,
@@ -151,8 +150,12 @@ const ArticlesManagement = props => {
 
   useEffect(() => {
     const id = props.match.params.id
-    !isNewPost && fetchArticle(id).then(initializeForm)
-  }, [])
+    if (isNewPost) {
+      resetForm()
+    } else {
+      fetchArticle(id).then(initializeForm)
+    }
+  }, [props.match.params.id])
 
   return (
     <Fragment>

@@ -82,7 +82,7 @@ const Articles = props => {
               { label: 'Description', key: 'description' },
               { label: 'Link 1', key: 'link1' },
               { label: 'Link 2', key: 'link2' },
-              { label: 'Actions', key: 'actions' }
+              { label: 'Actions', key: 'actions', isSortable: false }
             ]}
           />
         </Box>
