@@ -1,6 +1,6 @@
 import React from 'react'
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
-import { Grommet, Menu, Box, Text } from 'grommet'
+import { Link, Route, Redirect, Switch, withRouter } from 'react-router-dom'
+import { Box, Grommet, Menu, Text } from 'grommet'
 import {
   AddCircle,
   Gremlin,
@@ -17,19 +17,27 @@ import './App.scss'
 const Header = ({ history }) => {
   const routeTo = destination => () => history.push(destination)
   return (
-    <Box direction="row" background="brand" justify="between">
-      <Box direction="row" align="center">
-        <Gremlin size="large" />
-        <Text
-          margin={{ vertical: '0', horizontal: 'small' }}
-          size="medium"
-          weight="bold"
-        >
-          Wiki
-          <br />
-          Frankie
-        </Text>
-      </Box>
+    <Box
+      direction="row"
+      background="brand"
+      justify="between"
+      animation="slideDown"
+    >
+      <Link className="no-underline" to="/">
+        <Box direction="row" align="center">
+          <Gremlin size="large" />
+          <Text
+            color="light-1"
+            margin={{ vertical: '0', horizontal: 'small' }}
+            size="medium"
+            weight="bold"
+          >
+            Wiki
+            <br />
+            Frankie
+          </Text>
+        </Box>
+      </Link>
       <Menu
         icon={<MenuIcon />}
         label="Menu"
@@ -86,7 +94,13 @@ const Header = ({ history }) => {
 }
 
 const Footer = props => (
-  <Box direction="row" background="brand" pad="small" justify="between">
+  <Box
+    direction="row"
+    background="brand"
+    pad="small"
+    justify="between"
+    animation="slideUp"
+  >
     <Text>POWERED BY MOS</Text>
   </Box>
 )

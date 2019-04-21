@@ -4,7 +4,7 @@ const useArticles = id => {
   let endpoint = '/api/articles'
   let initial = []
   if (id) {
-    endpoint += '/id'
+    endpoint += `/${id}`
     initial = {}
   }
 
@@ -16,7 +16,7 @@ const useArticles = id => {
       .then(setData)
   }, [])
 
-  return data
+  return { articles: data, setAricles: setData }
 }
 
 export default useArticles

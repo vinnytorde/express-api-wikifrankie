@@ -158,7 +158,16 @@ const ArticlesManagement = props => {
     <Fragment>
       <PageHeader>{isNewPost ? 'Create' : 'Edit'} an Article</PageHeader>
       <Form onSubmit={handleSubmit}>
-        <Box margin="auto" width="xlarge">
+        <Box
+          margin="auto"
+          width="xlarge"
+          animation={{
+            type: 'fadeIn',
+            delay: 200,
+            duration: 750,
+            size: 'small'
+          }}
+        >
           <Box direction="row" margin={{ vertical: 'large' }} justify="between">
             <Box gap="small">
               <FormField

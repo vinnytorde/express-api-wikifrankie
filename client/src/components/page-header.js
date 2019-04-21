@@ -3,7 +3,15 @@ import { Box, Heading } from 'grommet'
 
 export default function PageHeader(props) {
   return (
-    <Box background="neutral-2">
+    <Box
+      animation={{
+        type: 'slideRight',
+        delay: 200,
+        duration: 750,
+        size: 'small'
+      }}
+      background="neutral-2"
+    >
       <Heading
         margin={{ horizontal: 'xlarge', vertical: 'small' }}
         weight="bold"
