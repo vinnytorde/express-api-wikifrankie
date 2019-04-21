@@ -62,3 +62,6 @@ typings/
 
 # generics
 .DS_Store
+
+# SQLite
+database.sqlite3
