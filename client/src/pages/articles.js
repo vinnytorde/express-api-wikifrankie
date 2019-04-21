@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
-import { Heading, Button } from 'grommet'
-import useArticles from '../hooks/useArticles'
+import { Box, Button } from 'grommet'
+import useArticles from '../hooks/articles'
 import Table from '../components/table'
+import PageHeader from '../components/page-header'
 import { toPrettyDate } from '../utils/utils'
 
 const Articles = props => {
@@ -37,10 +38,8 @@ const Articles = props => {
   }
 
   return (
-    <div>
-      <Heading margin="none" level={2}>
-        All Entries
-      </Heading>
+    <Box>
+      <PageHeader>All Entries</PageHeader>
 
       <Table
         data={data}
@@ -54,7 +53,7 @@ const Articles = props => {
           { label: 'Actions', key: 'actions' }
         ]}
       />
-    </div>
+    </Box>
   )
 }
 

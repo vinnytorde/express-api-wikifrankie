@@ -14,7 +14,7 @@ const useArticles = id => {
     fetch(endpoint)
       .then(r => r.json())
       .then(setData)
-  })
+  }, [])
 
   return data
 }

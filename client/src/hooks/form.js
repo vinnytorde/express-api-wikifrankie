@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import moment from 'moment'
 
-// const useForm = (name, initial = '', modifier = (e) => e) => {
 const useForm = ({
   name,
   type = 'text',
@@ -11,9 +9,7 @@ const useForm = ({
   validate = v => true
 }) => {
   let _initial = initial
-  if (type === 'date') {
-    _initial = moment(initial).format('YYYY-MM-DD')
-  }
+
   const [value, setValue] = useState(_initial)
 
   const _name = { name }
@@ -28,9 +24,13 @@ const useForm = ({
 
   const _onChange = {
     onChange(e) {
-      let newValue = e.target.value
+      let newValue
       if (type === 'checkbox') {
         newValue = !value
+      } else if (type === 'date') {
+        newValue = e
+      } else {
+        newValue = e.target.value
       }
       setValue(modifier(newValue))
     }

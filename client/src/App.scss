@@ -3,10 +3,10 @@ $accent-1: #6fffb0;
 $accent-2: #fd6fff;
 $accent-3: #81fced;
 $accent-4: #ffca58;
-$neutra1-1: #00873d;
-$neutra1-2: #3d138d;
-$neutra1-3: #00739d;
-$neutra1-4: #a2423d;
+$neutral-1: #00873d;
+$neutral-2: #3d138d;
+$neutral-3: #00739d;
+$neutral-4: #a2423d;
 $light-1: #f8f8f8;
 $light-2: #f2f2f2;
 $light-3: #ededed;
@@ -19,43 +19,3 @@ $status-error: #ff4040;
 $status-warning: #ffaa15;
 $status-ok: #00c781;
 $status-disabled: #cccccc;
-
-.footer,
-.content {
-  padding: 16px;
-}
-
-.footer {
-  padding: 16px;
-  background: $brand;
-  color: $light-1;
-}
-
-.add-article-form {
-  display: flex;
-  flex-direction: column;
-
-  label + div {
-    margin: 8px 0;
-  }
-
-  label {
-    display: flex;
-    flex-direction: column;
-    font-weight: 700;
-    text-transform: capitalize;
-    margin: 8px 0;
-    font-size: 1.25em;
-
-    input {
-      font-size: 0.85em;
-      max-width: 50%;
-    }
-
-    textarea {
-      font-size: 0.85em;
-      max-width: 50%;
-      height: 50px;
-    }
-  }
-}

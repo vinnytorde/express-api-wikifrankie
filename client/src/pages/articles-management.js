@@ -1,7 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import moment from 'moment'
-import { Button } from 'grommet'
+import {
+  Box,
+  Button,
+  Calendar,
+  CheckBox,
+  Form,
+  FormField,
+  Text,
+  TextArea,
+  TextInput
+} from 'grommet'
+import PageHeader from '../components/page-header'
 import useForm from '../hooks/form'
+import useArticle from '../hooks/articles'
 import { useSnackbar } from 'notistack'
 
 const fetchArticle = id => {
@@ -44,16 +56,21 @@ const ArticlesManagement = props => {
   const date = useForm({
     name: 'date',
     type: 'date',
-    value: new Date(),
-    modifier: date => moment(date).format('YYYY-MM-DD'),
+    value: new Date().toISOString(),
     required: true
   })
+  date.onSelect = date.onChange
+  date.date = date.value
+
   const expires = useForm({
     name: 'expires',
     type: 'date',
     value: '',
     modifier: date => moment(date).format('YYYY-MM-DD')
   })
+  expires.onSelect = expires.onChange
+  expires.date = expires.value
+
   const description = useForm({
     name: 'description',
     value: ''
@@ -125,8 +142,8 @@ const ArticlesManagement = props => {
     setId(_id)
     topic.onChange(stage(_topic))
     companyApplication.onChange(stage(_application))
-    date.onChange(stage(_activeDate))
-    expires.onChange(stage(_expirationDate))
+    date.onChange(_activeDate)
+    expires.onChange(_expirationDate)
     description.onChange(stage(_description))
     link1.onChange(stage(_link1))
     link2.onChange(stage(_link2))
@@ -140,50 +157,63 @@ const ArticlesManagement = props => {
   }, [])
 
   return (
-    <div>
-      <form className="add-article-form" onSubmit={handleSubmit}>
-        <h2>{isNewPost ? 'Create' : 'Edit'} an Article</h2>
-        <label>
-          <div>topic</div>
-          <input {...topic} />
-        </label>
-        <label>
-          <div>company/application</div>
-          <input {...companyApplication} />
-        </label>
-        <label>
-          <div>date</div>
-          <input {...date} />
-        </label>
-        <label>
-          <div>expired</div>
-          <input {...expires} />
-        </label>
-        <label>
-          <div>description</div>
-          <textarea {...description} />
-        </label>
-        <label>
-          <div>link1</div>
-          <input {...link1} />
-        </label>
-        <label>
-          <div>link2</div>
-          <input {...link2} />
-        </label>
-        <div>
-          {isNewPost && (
-            <label>
-              <div className="flex">
-                <span>Create another</span>
-                <input {...createAnother} />
-              </div>
-            </label>
-          )}
-          <Button primary label="Submit Article" type="submit" />
-        </div>
-      </form>
-    </div>
+    <Fragment>
+      <PageHeader>{isNewPost ? 'Create' : 'Edit'} an Article</PageHeader>
+      <Form onSubmit={handleSubmit}>
+        <Box margin="auto" width="xlarge">
+          <Box direction="row">
+            <Box gap="small">
+              <FormField
+                size="large"
+                label="Topic"
+                component={TextInput}
+                {...topic}
+              />
+              <FormField
+                size="large"
+                label="Company/Application"
+                component={TextInput}
+                {...companyApplication}
+              />
+            </Box>
+            <Box direction="row" gap="small">
+              <Box align="center">
+                <Text margin="medium">Date</Text>
+                <Calendar size="small" {...date} />
+              </Box>
+              <Box align="center">
+                <Text margin="medium">Expires</Text>
+                <Calendar size="small" {...expires} />
+              </Box>
+            </Box>
+          </Box>
+          <Box height="medium">
+            <Text>Description</Text>
+            <TextArea fill resize={false} {...description} />
+          </Box>
+          <Box direction="row" gap="small">
+            <FormField
+              size="large"
+              label="Link 2"
+              component={TextInput}
+              {...link2}
+            />
+            <FormField
+              size="large"
+              label="Link 1"
+              component={TextInput}
+              {...link1}
+            />
+          </Box>
+          <Box direction="row" margin="small" gap="small" justify="end">
+            {isNewPost && (
+              <CheckBox label="Create Another?" {...createAnother} />
+            )}
+            <Button primary label="Submit Article" type="submit" />
+          </Box>
+        </Box>
+      </Form>
+    </Fragment>
   )
 }
 

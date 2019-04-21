@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev:api": "nodemon ./bin/www",
-    "dev": "concurrently \"yarn:dev:api\" \"cd client && yarn start\" -n api,client",
+    "ui": "cd client && yarn start",
+    "dev": "concurrently \"yarn:dev:api\" \"yarn:ui\" -n api,client",
     "heroku-postbuild": "cd client && yarn && yarn build"
   },
   "nodemonConfig": {
@@ -38,7 +39,8 @@
     "husky": "^1.3.1",
     "lint-staged": "^8.1.5",
     "nodemon": "^1.18.11",
-    "prettier": "^1.17.0"
+    "prettier": "^1.17.0",
+    "sqlite3": "^4.0.6"
   },
   "husky": {
     "hooks": {
