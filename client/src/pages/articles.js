@@ -69,6 +69,7 @@ const Articles = props => {
       {!!data.length && (
         <Box animation={['fadeIn', 'slideUp']}>
           <Table
+            sortable
             data={data}
             columnConfig={[
               { label: 'Topic', key: 'topic' },

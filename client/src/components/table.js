@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
+  Anchor,
   Table as GrommetTable,
-  TableHeader,
-  TableRow,
   TableCell,
-  TableBody
+  TableBody,
+  TableHeader,
+  TableRow
 } from 'grommet'
 
-const Table = ({ data, columnConfig }) => {
+const Table = ({ data, columnConfig, sortable }) => {
+  const [sorted, setSorted] = useState(data)
+
   const row = data => {
     return (
       <TableRow>
@@ -20,16 +23,38 @@ const Table = ({ data, columnConfig }) => {
     )
   }
 
+  const sortBy = field => {
+    setSorted(
+      [...data].sort((a, b) => {
+        if (a[field] < b[field]) {
+          return -1
+        }
+        if (a[field] > b[field]) {
+          return 1
+        }
+        return 0
+      })
+    )
+  }
+
   return (
     <GrommetTable>
       <TableHeader>
         <TableRow>
-          {columnConfig.map(({ label }) => {
-            return <TableCell>{label}</TableCell>
+          {columnConfig.map(({ label, key }) => {
+            return (
+              <TableCell>
+                {sortable ? (
+                  <Anchor onClick={() => sortBy(key)}>{label}</Anchor>
+                ) : (
+                  { label }
+                )}
+              </TableCell>
+            )
           })}
         </TableRow>
       </TableHeader>
-      <TableBody>{data.map(row)}</TableBody>
+      <TableBody>{sorted.map(row)}</TableBody>
     </GrommetTable>
   )
 }
